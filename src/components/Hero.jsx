@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
-import profile from "../assets/1760355274767.jpg"
+const profile = "/images/1760355274767.jpg";
 
 function Hero({ isMobile, onSectionChange }) {
   const textReveal = {
@@ -45,7 +45,9 @@ function Hero({ isMobile, onSectionChange }) {
     return (
       <>
         <Link to="/contact" className="btn">Let's Talk</Link>
-        <a href="#" className="btn btn-secondary">Download Resume</a>
+        <a href="public/Shubham_Vashisht_Resume.pdf" className="btn btn-secondary" target="_blank" rel="noreferrer">
+          Download Resume
+        </a>
         <Link to="/projects" className="btn btn-secondary">View Projects</Link>
       </>
     );
