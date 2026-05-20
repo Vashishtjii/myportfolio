@@ -1,12 +1,4 @@
 
-  .contact-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .contact-form {
-    padding: 16px;
-  }
 :root {
   --bg: #ffffff;
   --surface: #f8f8ff;
@@ -814,15 +806,16 @@ section {
 }
 
 .contact-card {
-  width: min(760px, 100%);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   background: rgba(255,255,255,0.35);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 20px;
+  padding: 20px 20px 32px;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.5);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
+  overflow: visible;
 }
 
 .contact-section .section-title {
@@ -924,9 +917,9 @@ section {
   width: min(1000px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .contact-form {
@@ -940,6 +933,19 @@ section {
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.5);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .contact-card,
+  .contact-form {
+    height: 100%;
+  }
 }
 
 .form-group {
@@ -1056,6 +1062,12 @@ section {
   .contact-row-icon {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-form {
+    margin-top: 32px;
   }
 }
 

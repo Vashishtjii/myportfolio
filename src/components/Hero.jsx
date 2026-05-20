@@ -45,7 +45,7 @@ function Hero({ isMobile, onSectionChange }) {
     return (
       <>
         <Link to="/contact" className="btn">Let's Talk</Link>
-        <a href="public/Shubham_Vashisht_Resume.pdf" className="btn btn-secondary" target="_blank" rel="noreferrer">
+        <a href="/shubham_vashisht_resume.pdf" className="btn btn-secondary" target="_blank" rel="noreferrer">
           Download Resume
         </a>
         <Link to="/projects" className="btn btn-secondary">View Projects</Link>

@@ -65,9 +65,9 @@ function Contact() {
 
       <h3 className="contact-headline">Let's build something together</h3>
 
-      <div className="contact-container">
+      <div className="contact-container grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8 items-stretch">
         <motion.div
-          className="contact-card"
+          className="contact-card w-full h-full p-6 md:p-8 pb-8 md:pb-12 flex flex-col overflow-visible"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -84,7 +84,7 @@ function Contact() {
               whileHover={{ y: -2 }}
             >
               <span className="contact-row-icon">{row.icon}</span>
-              <div className="contact-row-content">
+              <div className="contact-row-content min-w-0">
                 <p className="contact-row-label">{row.label}</p>
                 {row.external ? (
                   <a
@@ -92,11 +92,12 @@ function Contact() {
                     target="_blank"
                     rel="noreferrer"
                     onClick={(e) => e.stopPropagation()}
+                    className="break-all md:break-normal"
                   >
                     {row.value}
                   </a>
                 ) : (
-                  <p className="contact-row-value">{row.value}</p>
+                  <p className="contact-row-value break-all md:break-normal">{row.value}</p>
                 )}
               </div>
 
@@ -108,7 +109,7 @@ function Contact() {
         </motion.div>
 
         <motion.form
-          className="contact-form"
+          className="contact-form w-full h-full mt-8 md:mt-0 p-6 md:p-8 flex flex-col justify-between overflow-visible"
           onSubmit={handleFormSubmit}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -122,6 +123,7 @@ function Contact() {
               type="text"
               name="name"
               placeholder="Your name"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
             />
           </div>
@@ -133,6 +135,7 @@ function Contact() {
               type="email"
               name="email"
               placeholder="your.email@example.com"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
             />
           </div>
@@ -144,11 +147,12 @@ function Contact() {
               name="message"
               placeholder="Your message here..."
               rows="5"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
               required
             />
           </div>
 
-          <button type="submit" className="btn">Send Message</button>
+          <button type="submit" className="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full py-3 px-4 rounded-md transition-colors">Send Message</button>
         </motion.form>
       </div>
     </motion.section>
