@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import ScreenCollage from "./ScreenCollage";
 import SkillTicker from "./SkillTicker";
-const profile = "/images/profile-themed.png";
+const profile = "/images/1760355274767.jpg";
 
 function Hero({ isMobile, onSectionChange }) {
   const textReveal = {
@@ -34,11 +34,11 @@ function Hero({ isMobile, onSectionChange }) {
           <button type="button" className="btn" onClick={() => scrollToSection("contact")}>
             Let’s Talk
           </button>
+          <a href="/Resume.pdf" className="btn btn-secondary" download>
+            Download Resume
+          </a>
           <button type="button" className="btn btn-secondary" onClick={() => scrollToSection("projects")}>
             View Projects
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={() => scrollToSection("about")}>
-            About Me
           </button>
         </>
       );
@@ -47,7 +47,7 @@ function Hero({ isMobile, onSectionChange }) {
     return (
       <>
         <Link to="/contact" className="btn">Let's Talk</Link>
-        <a href="/Resume.pdf" className="btn btn-secondary" target="_blank" rel="noreferrer">
+        <a href="/Resume.pdf" className="btn btn-secondary" target="_blank" rel="noreferrer" download>
           Download Resume
         </a>
         <Link to="/projects" className="btn btn-secondary">View Projects</Link>
@@ -102,15 +102,6 @@ function Hero({ isMobile, onSectionChange }) {
           )}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="hero-img"
-        >
-          <img src={profile} alt="Portrait of Shubham Vashisht" width="720" height="960" loading="eager" />
-        </motion.div>
-
         {isMobile && (
           <motion.div
             className="hero-actions hero-actions-mobile"
@@ -122,6 +113,15 @@ function Hero({ isMobile, onSectionChange }) {
             {renderSocials()}
           </motion.div>
         )}
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="hero-img"
+        >
+          <img src={profile} alt="Portrait of Shubham Vashisht" width="720" height="960" loading="eager" />
+        </motion.div>
 
       </div>
       <SkillTicker />

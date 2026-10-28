@@ -4,21 +4,6 @@ import ScreenCollage from "./ScreenCollage";
 
 const projectItems = [
   {
-    title: "Workforce Emotion & Attrition Intelligence",
-    range: "2026",
-    stack: ["Python", "Streamlit", "Scikit-learn", "Pandas"],
-    points: [
-      "Interactive Streamlit dashboard predicting employee attrition risk on the IBM HR dataset.",
-      "VotingClassifier ensemble for predictions and KMeans clustering for employee segmentation.",
-      "Calibrated risk thresholds for clearer, more reliable risk levels.",
-      "Clean dashboard UI with a collapsible sidebar.",
-    ],
-    placeholderColor: "#0ea5e9",
-    placeholderIcon: "📊",
-    category: "Data",
-    // Add link and liveDemo here when they are available.
-  },
-  {
     title: "Valorant-Themed Developer Portfolio",
     range: "2026-Present",
     stack: ["React + Vite", "Tailwind CSS", "Framer Motion"],
@@ -97,7 +82,7 @@ const card = {
 function Projects() {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
-  const filters = ["All", "Frontend", "Full Stack", "Data"];
+  const filters = ["All", "Frontend", "Full Stack"];
   const visibleProjects = projectItems.filter((project) => {
     if (filter === "All") return true;
     return project.category === filter;

@@ -59,7 +59,7 @@ function About() {
           </div>
           <div className="about-stat-card">
             <p className="about-stat-label">Projects</p>
-            <h3><Counter value="4" /></h3>
+            <h3><Counter value="3" /></h3>
           </div>
           <div className="about-stat-card">
             <p className="about-stat-label">University</p>

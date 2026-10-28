@@ -26,6 +26,7 @@ function App() {
     [],
   );
   const knownRoutes = ["/", "/about", "/projects", "/contact"];
+  const mobileLayout = isMobile || window.innerWidth <= 900;
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -45,12 +46,16 @@ function App() {
     updateViewport();
 
     mediaQuery.addEventListener("change", updateViewport);
+    window.addEventListener("resize", updateViewport);
 
-    return () => mediaQuery.removeEventListener("change", updateViewport);
+    return () => {
+      mediaQuery.removeEventListener("change", updateViewport);
+      window.removeEventListener("resize", updateViewport);
+    };
   }, []);
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!mobileLayout) {
       return undefined;
     }
 
@@ -77,25 +82,21 @@ function App() {
     observedSections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
-  }, [isMobile, sectionIds]);
+  }, [mobileLayout, sectionIds]);
 
   return (
     <div className={`app-shell ${location.pathname === "/" ? "home-route" : ""} ${location.pathname === "/contact" ? "contact-route" : ""}`}>
       <Navbar
-        isMobile={isMobile}
+        isMobile={mobileLayout}
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         theme={theme}
         onThemeChange={() => setTheme((current) => current === "dark" ? "light" : "dark")}
       />
       <main className="app-content">
-        {isMobile && location.pathname === "/contact" ? (
-          <ContactPage />
-        ) : isMobile && location.pathname === "/" ? (
-          <HomePage />
-        ) : isMobile && !knownRoutes.includes(location.pathname) ? (
+        {mobileLayout && !knownRoutes.includes(location.pathname) ? (
           <NotFound />
-        ) : isMobile ? (
+        ) : mobileLayout ? (
           <MobilePortfolio onSectionChange={setActiveSection} />
         ) : (
           <Routes>
