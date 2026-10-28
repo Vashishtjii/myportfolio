@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { MdOutlineEmail, MdOutlineLocationOn } from "react-icons/md";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import ScreenCollage from "./ScreenCollage";
 
 function Contact() {
   const handleFormSubmit = (e) => {
@@ -59,6 +60,7 @@ function Contact() {
       viewport={{ once: true }}
       style={{ pointerEvents: "auto" }}
     >
+      <ScreenCollage variant="contact" />
       <h2 className="section-title">
         Contact <span className="heading-gradient">Me</span>
       </h2>
@@ -140,7 +142,7 @@ function Contact() {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group message-group">
             <label htmlFor="message">Message</label>
             <textarea
               id="message"

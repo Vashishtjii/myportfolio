@@ -1,22 +1,42 @@
 import Navbar from "./components/Navbar";
 import { useEffect, useMemo, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import MobilePortfolio from "./components/MobilePortfolio";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [isMobile, setIsMobile] = useState(() =>
     window.matchMedia("(max-width: 900px)").matches,
   );
   const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
 
   const sectionIds = useMemo(
     () => ["home", "about", "skills", "projects", "experience", "contact"],
     [],
   );
+  const knownRoutes = ["/", "/about", "/projects", "/contact"];
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const isViewportRoute = location.pathname === "/" || location.pathname === "/contact";
+    document.body.classList.toggle("viewport-route", isViewportRoute);
+    return () => document.body.classList.remove("viewport-route");
+  }, [location.pathname]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
@@ -60,16 +80,22 @@ function App() {
   }, [isMobile, sectionIds]);
 
   return (
-    <div className="app-shell">
-      <div className="bg-blob bg-blob-1" aria-hidden="true" />
-      <div className="bg-blob bg-blob-2" aria-hidden="true" />
+    <div className={`app-shell ${location.pathname === "/" ? "home-route" : ""} ${location.pathname === "/contact" ? "contact-route" : ""}`}>
       <Navbar
         isMobile={isMobile}
         activeSection={activeSection}
         onSectionChange={setActiveSection}
+        theme={theme}
+        onThemeChange={() => setTheme((current) => current === "dark" ? "light" : "dark")}
       />
       <main className="app-content">
-        {isMobile ? (
+        {isMobile && location.pathname === "/contact" ? (
+          <ContactPage />
+        ) : isMobile && location.pathname === "/" ? (
+          <HomePage />
+        ) : isMobile && !knownRoutes.includes(location.pathname) ? (
+          <NotFound />
+        ) : isMobile ? (
           <MobilePortfolio onSectionChange={setActiveSection} />
         ) : (
           <Routes>
@@ -77,10 +103,17 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </main>
+      <footer className="site-footer">
+        <p>© 2026 Shubham Vashisht</p>
+        <div className="footer-socials">
+          <a href="https://github.com/Vashishtjii" target="_blank" rel="noreferrer" aria-label="GitHub profile"><FaGithub /></a>
+          <a href="https://www.linkedin.com/in/shubham-vashisht-317775292/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile"><FaLinkedinIn /></a>
+        </div>
+      </footer>
     </div>
   );
 }

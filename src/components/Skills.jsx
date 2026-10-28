@@ -15,13 +15,27 @@ const skillGroups = [
     ],
   },
   {
-    label: "JavaScript & Core",
+    label: "Data & Analytics",
+    items: [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "Streamlit",
+      "Data Cleaning & Analysis",
+      "Data Visualization",
+      "Machine Learning Basics",
+    ],
+  },
+  {
+    label: "Core Skills",
     items: [
       "JavaScript",
       "ES6+",
       "Async/Await",
       "State Management",
       "REST API Integration",
+      "Troubleshooting & Root Cause Analysis",
+      "Technical Documentation",
     ],
   },
   {

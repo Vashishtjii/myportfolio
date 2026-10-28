@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { HiMoon, HiSun } from "react-icons/hi2";
 
 const mobileLinks = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
-  { label: "Education", id: "experience" },
+  { label: "Experience", id: "experience" },
   { label: "Contact", id: "contact" },
 ];
 
-function Navbar({ isMobile, activeSection, onSectionChange }) {
+function Navbar({ isMobile, activeSection, onSectionChange, theme, onThemeChange }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
+    // Route changes close the mobile menu after navigation.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false);
   }, [location.pathname]);
 
@@ -31,7 +34,7 @@ function Navbar({ isMobile, activeSection, onSectionChange }) {
 
   return (
     <nav className="navbar">
-      <h2>Shubham Vashisht</h2>
+      <NavLink className="navbar-logo" to="/" aria-label="Shubham Vashisht home"><span>&lt;/&gt;</span> shubham.vashisht</NavLink>
       <button
         type="button"
         className="navbar-toggle"
@@ -73,6 +76,9 @@ function Navbar({ isMobile, activeSection, onSectionChange }) {
           </>
         )}
       </div>
+      <button type="button" className="theme-toggle" onClick={onThemeChange} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}>
+        {theme === "dark" ? <HiSun /> : <HiMoon />}
+      </button>
     </nav>
   );
 }
